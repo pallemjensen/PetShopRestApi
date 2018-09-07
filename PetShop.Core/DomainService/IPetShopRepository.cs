@@ -13,6 +13,6 @@ namespace PetShop.Core.DomainService
 
         Pet CreatePet(Pet pet);
 
-        Pet GetPetById(int petId);
+        Pet GetPetById(int petId);      
     }
 }

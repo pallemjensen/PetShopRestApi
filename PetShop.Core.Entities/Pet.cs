@@ -20,5 +20,7 @@ namespace PetShop.Core.Entities
         public string PreviousOwner { get; set; }
 
         public double Price { get; set; }
+
+        public int OwnerId { get; set; }
     }
 }

@@ -20,6 +20,6 @@ namespace PetShop.Core.ApplicationService
 
         Pet DeletePet(Pet pet);
 
-        Pet GetPetById(int petId);
+        Pet GetPetById(int petId);       
     }
 }

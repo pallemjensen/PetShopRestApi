@@ -65,6 +65,6 @@ namespace PetShop.Core.ApplicationService.Implementation
         public Pet GetPetById(int petId)
         {
             return _petShopRepository.GetPetById(petId);
-        }
+        }  
     }
 }

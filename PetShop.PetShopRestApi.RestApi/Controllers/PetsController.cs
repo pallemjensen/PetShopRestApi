@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -28,14 +25,14 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
     
 
-        // GET api/values/5
+        // GET api/pets/5
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
             return _petShopRepository.GetPetById(id);
         }
 
-        // POST api/values
+        // POST api/pets
         [HttpPost]
         public ActionResult Post([FromBody] Pet pet)
         {
@@ -43,7 +40,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
             return Ok("Pet with id " + pet.PetId + " was created!");
         }
 
-        // PUT api/values/5
+        // PUT api/pets/5
         [HttpPut("{id}")]
         public ActionResult Put(Pet pet)
         {
@@ -52,12 +49,11 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
             return Ok("Pet with id " + id + " was updated.");
         }
 
-        // DELETE api/values/5
+        // DELETE api/pets/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            Pet pet = new Pet();
-            pet = _petShopRepository.GetPetById(id);
+            var pet = _petShopRepository.GetPetById(id);
             _petShopRepository.DeletePet(pet);
             return Ok("Pet with id " + id + " was deleted.");
         }

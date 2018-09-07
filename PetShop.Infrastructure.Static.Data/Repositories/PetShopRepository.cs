@@ -4,8 +4,8 @@ using PetShop.Core.Entities;
 
 namespace PetShop.Infrastructure.Static.Data.Repositories
 {
-    public class PetShopRepository: IPetShopRepository
-    {      
+    public class PetShopRepository : IPetShopRepository
+    {
         public IEnumerable<Pet> ReadAllPets()
         {
             return FakeDb.Pets;
@@ -20,13 +20,13 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
             petToUpdate.SoldDate = pet.SoldDate;
             petToUpdate.Color = pet.Color;
             petToUpdate.PreviousOwner = pet.PreviousOwner;
-            pet.Price = pet.Price;
+            petToUpdate.Price = pet.Price;
 
             return pet;
         }
 
         public Pet DeletePet(Pet pet)
-        {        
+        {
             FakeDb.Pets.Remove(pet);
             return pet;
         }
@@ -47,7 +47,8 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
                     return pet;
                 }
             }
+
             return null;
         }
-    }   
+    }
 }
