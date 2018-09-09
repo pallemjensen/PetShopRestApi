@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PetShop.Core.Entities
 {
@@ -19,6 +16,6 @@ namespace PetShop.Core.Entities
 
         public string Email { get; set; }
 
-        public int PetOwnedId { get; set; }
+        public List<Pet> OwnedPets { get; set; }
     }
 }

@@ -21,6 +21,6 @@ namespace PetShop.Core.Entities
 
         public double Price { get; set; }
 
-        public int OwnerId { get; set; }
+        public Owner Owner { get; set; }
     }
 }

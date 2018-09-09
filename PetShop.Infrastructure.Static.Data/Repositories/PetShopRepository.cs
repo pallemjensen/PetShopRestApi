@@ -22,7 +22,7 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
             petToUpdate.PreviousOwner = pet.PreviousOwner;
             petToUpdate.Price = pet.Price;
 
-            return pet;
+            return petToUpdate;
         }
 
         public Pet DeletePet(Pet pet)

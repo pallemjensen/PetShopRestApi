@@ -38,7 +38,7 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 
         public Owner CreateOwner(Owner owner)
         {
-            owner.OwnerId = FakeDb.PetId++;
+            owner.OwnerId = FakeDb.OwnerId++;
             FakeDb.Owners.Add(owner);
             return owner;
         }
