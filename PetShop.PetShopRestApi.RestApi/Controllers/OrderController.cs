@@ -37,7 +37,6 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPost]
         public  ActionResult<Order> Post([FromBody] Order order)
         {
-            var numberoforders = FakeDb.Orders.Count();
             return _orderService.CreateOrder(order);
         }
 
