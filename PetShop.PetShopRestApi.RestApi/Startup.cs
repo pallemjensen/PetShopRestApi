@@ -27,11 +27,12 @@ namespace PetShop.PetShopRestApi.RestApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IPetShopRepository, PetShopRepository>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
-            services.AddScoped<IPetShopService, PetShopService>();
-            services.AddScoped<IOwnerService, OwnerService>();
-            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderRepository, OrderRepository>();
-
+            //services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IPetShopService, PetShopService>();
+            //services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddScoped<IOrderService, OrderService>(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ApplicationService\Implementation\CustomerService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PetShop.Core.Entities\PetShop.Core.Entities.csproj" />
   </ItemGroup>
 
