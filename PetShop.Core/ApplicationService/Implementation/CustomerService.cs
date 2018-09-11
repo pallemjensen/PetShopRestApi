@@ -1,45 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
 namespace PetShop.Core.ApplicationService.Implementation
 {
     public class CustomerService : ICustomerService
     {
-        public Customer NewCustomer(string firstName, string lastName, string address)
+
+        private readonly ICustomerRepository _customerRepository;
+
+        public CustomerService(ICustomerRepository customerRepository)
         {
-            throw new NotImplementedException();
-        }
+            _customerRepository = customerRepository;
+        }       
 
         public Customer CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+           return _customerRepository.CreateCustomer(customer);
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer FindCustomerById(int id)
+        {
+           return _customerRepository.ReadCustomerById(id);
+        }
+
+        public Customer FindCustomerByIdIncludeOrders(int id)
         {
             throw new NotImplementedException();
         }
 
         public List<Customer> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return _customerRepository.ReadAllCustomers().ToList();
         }
 
-        public List<Customer> GetAllByFirstName(string firstName)
+        public List<Customer> GetAllByFirstName()
         {
-            throw new NotImplementedException();
+            List<Customer> customers = new List<Customer>();
+            return customers = GetAllCustomers().OrderBy((custByName => custByName.FirstName)).ToList();         
         }
 
-        public Customer UpdateCustomer(Customer customer)
+        public Customer UpdateCustomer(Customer customerUpdate)
         {
-            throw new NotImplementedException();
+            return _customerRepository.UpdateCustomer(customerUpdate);
         }
 
-        public Customer DeleteCustomer(int customerId)
+        public Customer DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            return _customerRepository.DeleteCustomer(id);
         }
     }
 }

@@ -9,7 +9,9 @@ namespace PetShop.Infrastructure.Static.Data
         public static int OwnerId = 1;
         public static int PetId = 1;
         public static int OrderId = 1;
+        public static int CustomerId = 1;
 
+        public static List<Customer> Customers = new List<Customer>();
         public static List<Pet> Pets = new List<Pet>();     
         public static List<Owner> Owners = new List<Owner>();
         public static List<Order>   Orders = new List<Order>();
@@ -198,6 +200,63 @@ namespace PetShop.Infrastructure.Static.Data
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(4)),
                 DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(3))
             };
+            var custumer1 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Charlie",
+                LastName = "Dean",
+                Address = "Strawberry Street 5"
+            };
+            var custumer2 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Finn",
+                LastName = "Hammer",
+                Address = "Some Avenue 7"
+            };
+            var custumer3 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Dan",
+                LastName = "Brown",
+                Address = "Yellow Road 19"
+            };
+            var custumer4 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Michael",
+                LastName = "Red",
+                Address = "Wall Street 25"
+            };
+            var custumer5 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Louise",
+                LastName = "Slam Dunk",
+                Address = "Funny Street 1"
+            };
+            var custumer6 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Minnie",
+                LastName = "Driver",
+                Address = "City Middle 345"
+            };
+            var custumer7 = new Customer()
+            {
+                CustomerId = CustomerId++,
+                FirstName = "Christopher",
+                LastName = "Wankel",
+                Address = "Muppet Road 78"
+            };
+
+            Customers.Add(custumer1);
+            Customers.Add(custumer2);
+            Customers.Add(custumer3);
+            Customers.Add(custumer4);
+            Customers.Add(custumer5);
+            Customers.Add(custumer6);
+            Customers.Add(custumer7);
 
             Owners.Add(owner1);
             Owners.Add(owner2);

@@ -12,7 +12,7 @@ namespace PetShop.Core.Entities
 
         public DateTime DeliveryDate { get; set; }
 
-        //public Customer Customer { get; set; }
+        public Customer Customer { get; set; }
 
     }
 }
