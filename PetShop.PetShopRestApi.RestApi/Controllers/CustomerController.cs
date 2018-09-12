@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.Entities;
@@ -32,13 +27,29 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Customer> Get(int id)
         {
-            return _customerService.FindCustomerById(id);
+            //if (id < 1)
+            //{
+            //    return BadRequest("Id must be greater then 0");
+            //}
+
+            return _customerService.FindCustomerByIdIncludeOrders(id);
+            //return _customerService.FindCustomerById(id);
         }       
 
         // POST: api/Customer
         [HttpPost]
         public ActionResult<Customer> Post([FromBody] Customer customer)
         {
+            //    if (string.IsNullOrEmpty(customer.FirstName))
+            //    {
+            //        return BadRequest("Firstname is Required for Creating Customer");
+            //    }
+
+            //    if (string.IsNullOrEmpty(customer.LastName))
+            //    {
+            //        return BadRequest("LastName is Required for Creating Customer");
+            //    }
+
             return _customerService.CreateCustomer(customer);
         }
 

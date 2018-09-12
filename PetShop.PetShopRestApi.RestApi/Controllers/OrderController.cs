@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
@@ -37,7 +38,17 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPost]
         public  ActionResult<Order> Post([FromBody] Order order)
         {
-            return _orderService.CreateOrder(order);
+            try
+            {
+                return Ok(_orderService.CreateOrder(order));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+
+            
         }
 
         // PUT: api/Order/5

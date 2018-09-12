@@ -7,6 +7,20 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
+        public OrderRepository()
+        {
+            if (FakeDb.Orders.Count > 0) return;
+
+            var order8 = new Order()
+            {
+                OrderId = FakeDb.OrderId++,
+                DeliveryDate = DateTime.Now.AddMonths(1),
+                OrderDate = DateTime.Now.AddMonths(-1)
+            };
+            FakeDb.Orders.Add(order8);
+        }
+
+
         public IEnumerable<Order> GetAllOrders()
         {
             return FakeDb.Orders;

@@ -27,7 +27,8 @@ namespace PetShop.Infrastructure.Static.Data
                 Color = "White",
                 PreviousOwner = "Hans",
                 Price = 123,
-                Type = "Dog",                                
+                Type = "Dog", 
+                Owner = new Owner() {OwnerId = 1}
             };
             var pet2 = new Pet()
             {
@@ -39,6 +40,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Peter",
                 Price = 234,
                 Type = "Dog",
+                Owner = new Owner() { OwnerId = 2 }
             };
             var pet3 = new Pet()
             {
@@ -50,6 +52,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Bente",
                 Price = 9236,
                 Type = "Goat",
+                Owner = new Owner() { OwnerId = 3 }
             };
             var pet4 = new Pet()
             {
@@ -61,6 +64,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Finn",
                 Price = 549,
                 Type = "Horse",
+                Owner = new Owner() { OwnerId = 4 }
             };
             var pet5 = new Pet()
             {
@@ -72,6 +76,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Jasper",
                 Price = 2356,
                 Type = "Bird",
+                Owner = new Owner() { OwnerId = 5 }
             };
             var pet6 = new Pet()
             {
@@ -83,6 +88,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Sophie",
                 Price = 12,
                 Type = "Cat",
+                Owner = new Owner() { OwnerId = 6 }
             };
             var pet7 = new Pet()
             {
@@ -94,6 +100,7 @@ namespace PetShop.Infrastructure.Static.Data
                 PreviousOwner = "Carrie",
                 Price = 56,
                 Type = "Cat",
+                Owner = new Owner() { OwnerId = 7 }
             };
             var owner1 = new Owner()
             {
@@ -157,92 +164,100 @@ namespace PetShop.Infrastructure.Static.Data
                 Address = "Marvel Universe Women Apartments",
                 PhoneNumber = "000000001",
                 Email = "soontobeonph@beexcited.yea",
+                
             };
             var order1 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(10)),
-                DeliveryDate = DateTime.Today
+                DeliveryDate = DateTime.Today,
+                Customer = new Customer() { CustomerId = 7 }
             };
             var order2 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(12)),
-                DeliveryDate = DateTime.Today
+                DeliveryDate = DateTime.Today,
+                Customer = new Customer() { CustomerId = 7 }
             };
             var order3 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(8)),
-                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(5))
+                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(5)),
+                Customer = new Customer() { CustomerId = 1 }
             };
             var order4 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(5)),
-                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(3))
+                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(3)),
+                Customer = new Customer() { CustomerId = 3 }
             };
             var order5 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(7)),
-                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(2))
+                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(2)),
+                Customer = new Customer() { CustomerId = 6 }
             };
             var order6 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(11)),
-                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(1))
+                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(1)),
+                Customer = new Customer() { CustomerId = 5 }
             };
             var order7 = new Order()
             {
                 OrderId = OrderId++,
                 OrderDate = DateTime.Today.Subtract(TimeSpan.FromDays(4)),
-                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(3))
+                DeliveryDate = DateTime.Today.Add(TimeSpan.FromDays(3)),
+                Customer = new Customer() { CustomerId = 4 }
             };
-            var custumer1 = new Customer()
+            var customer1 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Charlie",
                 LastName = "Dean",
                 Address = "Strawberry Street 5"
             };
-            var custumer2 = new Customer()
+            var customer2 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Finn",
                 LastName = "Hammer",
                 Address = "Some Avenue 7"
             };
-            var custumer3 = new Customer()
+            var customer3 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Dan",
                 LastName = "Brown",
                 Address = "Yellow Road 19"
             };
-            var custumer4 = new Customer()
+            var customer4 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Michael",
                 LastName = "Red",
                 Address = "Wall Street 25"
             };
-            var custumer5 = new Customer()
+            var customer5 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Louise",
                 LastName = "Slam Dunk",
                 Address = "Funny Street 1"
             };
-            var custumer6 = new Customer()
+            var customer6 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Minnie",
                 LastName = "Driver",
                 Address = "City Middle 345"
             };
-            var custumer7 = new Customer()
+            var customer7 = new Customer()
             {
                 CustomerId = CustomerId++,
                 FirstName = "Christopher",
@@ -250,13 +265,13 @@ namespace PetShop.Infrastructure.Static.Data
                 Address = "Muppet Road 78"
             };
 
-            Customers.Add(custumer1);
-            Customers.Add(custumer2);
-            Customers.Add(custumer3);
-            Customers.Add(custumer4);
-            Customers.Add(custumer5);
-            Customers.Add(custumer6);
-            Customers.Add(custumer7);
+            Customers.Add(customer1);
+            Customers.Add(customer2);
+            Customers.Add(customer3);
+            Customers.Add(customer4);
+            Customers.Add(customer5);
+            Customers.Add(customer6);
+            Customers.Add(customer7);
 
             Owners.Add(owner1);
             Owners.Add(owner2);

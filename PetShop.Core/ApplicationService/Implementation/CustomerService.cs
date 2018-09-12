@@ -11,9 +11,11 @@ namespace PetShop.Core.ApplicationService.Implementation
     {
 
         private readonly ICustomerRepository _customerRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository, IOrderRepository orderRepository)
         {
+            _orderRepository = orderRepository;
             _customerRepository = customerRepository;
         }       
 
@@ -29,7 +31,10 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            throw new NotImplementedException();
+            var customer = _customerRepository.ReadCustomerById(id);
+            customer.Orders = _orderRepository.GetAllOrders()
+                .Where(order => order.Customer.CustomerId == customer.CustomerId).ToList();
+            return customer;
         }
 
         public List<Customer> GetAllCustomers()

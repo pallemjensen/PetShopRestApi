@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -15,14 +16,13 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 
         public Customer ReadCustomerById(int id)
         {
-            foreach (var customer in FakeDb.Customers)
-            {
-                if (customer.CustomerId == id)
+            return FakeDb.Customers.Select(c => new Customer()
                 {
-                    return customer;
-                }
-            }
-            return null;
+                    CustomerId = c.CustomerId,
+                    FirstName = c.FirstName,
+                    Address = c.Address,
+                    LastName = c.LastName
+            }).FirstOrDefault(c => c.CustomerId == id);
         }
 
         public IEnumerable<Customer> ReadAllCustomers()
