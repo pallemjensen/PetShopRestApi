@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using PetShop.Core.DomainService;
@@ -21,7 +22,16 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Customer CreateCustomer(Customer customer)
         {
-           return _customerRepository.CreateCustomer(customer);
+            if (customer.FirstName == null || customer.LastName == null)
+            {
+                throw new InvalidDataException("A customer must have a first name and last name.");
+            }
+
+            if (customer.FirstName.Any(char.IsDigit) || customer.LastName.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Names can not contain numbers.");
+            }
+            return _customerRepository.CreateCustomer(customer);
         }
 
         public Customer FindCustomerById(int id)

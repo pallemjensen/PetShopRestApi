@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -49,6 +53,40 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Pet CreatePet(Pet pet)
         {
+            //if (DateTime.TryParse(pet.BirthDate.ToString(CultureInfo.InvariantCulture), out var temp))
+            //{
+            //    pet.BirthDate = Convert.ToDateTime(temp.ToShortDateString());
+            //}
+            //else
+            //{
+            //    throw new InvalidDataException("Birthday is not a valid date.");
+            //}
+
+            if (!Regex.IsMatch(Convert.ToString(pet.Price, CultureInfo.InvariantCulture), $@"^\d+$"))
+            {
+                throw new InvalidDataException("Price can only contain numbers.");
+            }
+
+            if (pet.PetName == null || pet.PetName.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Pet must have a name and it can not contain numbers.");
+            }
+
+            if (pet.Color == null || pet.Color.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Pet must have a color and it can not contain numbers.");
+            }
+
+            if (pet.Type == null || pet.Type.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Pet must have a type and it can not contain numbers.");
+            }
+
+            if (pet.BirthDate == null)
+            {
+                throw new InvalidDataException("Pet must have a birthday.");
+            }
+
            return _petShopRepository.CreatePet(pet);           
         }
 
