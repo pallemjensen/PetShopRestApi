@@ -48,7 +48,7 @@ namespace PetShop.Core.ApplicationService.Implementation
         public List<Customer> GetAllCustomers()
         {
             return _customerRepository.ReadAllCustomers().ToList();
-        }
+        }      
 
         public List<Customer> GetAllByFirstName(string name)
         {

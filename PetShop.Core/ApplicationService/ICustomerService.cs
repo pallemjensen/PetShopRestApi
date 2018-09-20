@@ -15,7 +15,7 @@ namespace PetShop.Core.ApplicationService
 
         List<Customer> GetAllCustomers();
 
-        List<Customer> GetAllByFirstName();
+        List<Customer> GetAllByFirstName(string name);
      
         Customer UpdateCustomer(Customer customerUpdate);
         
