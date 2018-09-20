@@ -50,10 +50,12 @@ namespace PetShop.Core.ApplicationService.Implementation
             return _customerRepository.ReadAllCustomers().ToList();
         }
 
-        public List<Customer> GetAllByFirstName()
+        public List<Customer> GetAllByFirstName(string name)
         {
-            List<Customer> customers = new List<Customer>();
-            return customers = GetAllCustomers().OrderBy((custByName => custByName.FirstName)).ToList();         
+            var list = _customerRepository.ReadAllCustomers();
+            var customersWithRightName = list.Where(customer => customer.FirstName.Equals(name));
+            customersWithRightName.OrderBy(customer => customer.FirstName);
+            return customersWithRightName.ToList();
         }
 
         public Customer UpdateCustomer(Customer customerUpdate)
