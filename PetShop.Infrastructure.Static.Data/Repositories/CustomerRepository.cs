@@ -17,7 +17,8 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 
         public Customer ReadCustomerById(int id)
         {
-            return FakeDb.Customers.Select(c => new Customer()
+            return FakeDb.Customers.
+                Select(c => new Customer()
                 {
                     CustomerId = c.CustomerId,
                     FirstName = c.FirstName,

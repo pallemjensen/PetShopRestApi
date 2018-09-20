@@ -10,7 +10,6 @@ namespace PetShop.Infrastructure.Data
     {
         public PetshopContext(DbContextOptions<PetshopContext> options) : base(options) {}
 
-
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Pet> Pets { get; set; }

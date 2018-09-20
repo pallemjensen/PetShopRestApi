@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.ApplicationService.Implementation;
 using PetShop.Core.DomainService;
-using PetShop.Infrastructure.Static.Data;
-using PetShop.Infrastructure.Static.Data.Repositories;
+using PetShop.Infrastructure.Data;
+using PetShop.Infrastructure.Data.Repositories;
 
 namespace PetShop.PetShopRestApi.RestApi
 {
@@ -15,7 +16,7 @@ namespace PetShop.PetShopRestApi.RestApi
     {
         public Startup(IConfiguration configuration)
         {
-            FakeDb.InitData();
+            //FakeDb.InitData();
             Configuration = configuration;
         }
 
@@ -24,15 +25,24 @@ namespace PetShop.PetShopRestApi.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddScoped<IPetShopRepository, PetShopRepository>();
-            services.AddScoped<IOwnerRepository, OwnerRepository>();
-            services.AddScoped<IOrderRepository, OrderRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddScoped<IPetShopRepository, PetRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
-            services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
-            services.AddScoped<IOrderService, OrderService>(); 
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

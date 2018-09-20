@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
@@ -8,9 +9,16 @@ namespace PetShop.Infrastructure.Data.Repositories
 {
     public class PetRepository : IPetShopRepository
     {
+        readonly PetshopContext _ctx;
+
+        public PetRepository(PetshopContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public IEnumerable<Pet> ReadAllPets()
         {
-            throw new NotImplementedException();
+            return _ctx.Pets;
         }
 
         public Pet UpdatePet(Pet pet)
@@ -25,12 +33,14 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet CreatePet(Pet pet)
         {
-            throw new NotImplementedException();
+            var _pet = _ctx.Pets.Add(pet).Entity;
+            _ctx.SaveChanges();
+            return _pet;
         }
 
         public Pet GetPetById(int petId)
         {
-            throw new NotImplementedException();
+            return _ctx.Pets.FirstOrDefault((p => p.PetId == petId));
         }
     }
 }

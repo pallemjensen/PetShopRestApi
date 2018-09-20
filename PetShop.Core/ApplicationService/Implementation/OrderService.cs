@@ -28,15 +28,15 @@ namespace PetShop.Core.ApplicationService.Implementation
         public Order CreateOrder(Order order)
         {
             
-            if (order.Customer == null || order.Customer.CustomerId <= 0 )
-            {
-                throw new InvalidDataException("To create an order, you need a customer");
-            }
+            //if (order.Customer == null || order.Customer.CustomerId <= 0 )
+            //{
+            //    throw new InvalidDataException("To create an order, you need a customer");
+            //}
 
-            if (_customerRepository.ReadCustomerById(order.Customer.CustomerId) == null)
-            {
-                throw new InvalidDataException("Customer was not found.");
-            }
+            //if (_customerRepository.ReadCustomerById(order.Customer.CustomerId) == null)
+            //{
+            //    throw new InvalidDataException("Customer was not found.");
+            //}
 
             if (order.OrderDate == null)
             {

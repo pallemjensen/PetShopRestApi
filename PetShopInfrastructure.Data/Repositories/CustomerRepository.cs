@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -8,19 +8,29 @@ namespace PetShop.Infrastructure.Data.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
+        readonly PetshopContext _ctx;
+
+        public CustomerRepository(PetshopContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public Customer CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var cust = _ctx.Customers.Add(customer).Entity;
+            _ctx.SaveChanges();
+            return cust;
+           
         }
 
         public Customer ReadCustomerById(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Customers.FirstOrDefault(c => c.CustomerId == id);
         }
 
         public IEnumerable<Customer> ReadAllCustomers()
         {
-            throw new NotImplementedException();
+            return _ctx.Customers;
         }
 
         public Customer UpdateCustomer(Customer customerUpdate)
