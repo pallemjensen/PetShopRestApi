@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.Entities;
-using PetShop.Infrastructure.Static.Data;
 
 namespace PetShop.PetShopRestApi.RestApi.Controllers
 {
@@ -46,8 +45,6 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
             {
                 return BadRequest(e.Message);
             }
-
-
             
         }
 

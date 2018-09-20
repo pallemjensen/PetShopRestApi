@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -56,6 +53,12 @@ namespace PetShop.Core.ApplicationService.Implementation
             {
                 throw new InvalidDataException("Address must contain both letters and numbers.");
             }
+
+            if (owner.Email.Length < 7)
+            {
+                throw new InvalidDataException("Email must be at least 7 characters.");
+            }
+
             return _ownerRepository.CreateOwner(owner);
         }
 

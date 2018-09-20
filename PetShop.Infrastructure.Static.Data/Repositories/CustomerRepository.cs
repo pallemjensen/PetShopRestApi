@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -32,10 +33,12 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 
         public Customer UpdateCustomer(Customer customerUpdate)
         {
+            string name;
             Customer customerToUpdate = ReadCustomerById(customerUpdate.CustomerId);
             customerToUpdate.FirstName = customerUpdate.FirstName;
+            name = ReadCustomerById(2).FirstName;
             customerToUpdate.LastName = customerUpdate.LastName;
-            customerToUpdate.Address = customerUpdate.Address;          
+            customerToUpdate.Address = customerUpdate.Address;
 
             return customerToUpdate;
         }

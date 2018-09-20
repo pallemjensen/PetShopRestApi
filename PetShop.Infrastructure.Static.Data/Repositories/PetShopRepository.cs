@@ -13,8 +13,10 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
 
         public Pet UpdatePet(Pet pet)
         {
+            string name;
             Pet petToUpdate = GetPetById(pet.PetId);
             petToUpdate.PetName = pet.PetName;
+            name = GetPetById(2).PetName;
             petToUpdate.Type = pet.Type;
             petToUpdate.BirthDate = pet.BirthDate;
             petToUpdate.SoldDate = pet.SoldDate;
