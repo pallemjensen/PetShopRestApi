@@ -32,8 +32,8 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
             //    return BadRequest("Id must be greater then 0");
             //}
 
-            return _customerService.FindCustomerByIdIncludeOrders(id);
-            //return _customerService.FindCustomerById(id);
+            //return _customerService.FindCustomerByIdIncludeOrders(id);
+           return _customerService.FindCustomerById(id);
         }       
 
         // POST: api/Customer
