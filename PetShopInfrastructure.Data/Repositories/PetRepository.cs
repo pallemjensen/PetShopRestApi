@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -19,6 +20,7 @@ namespace PetShop.Infrastructure.Data.Repositories
         public IEnumerable<Pet> ReadAllPets()
         {
             return _ctx.Pets;
+            //return _ctx.Pets.Include(p => p.Owner);
         }
 
         public Pet UpdatePet(Pet pet)

@@ -50,5 +50,10 @@ namespace PetShop.Infrastructure.Static.Data.Repositories
             FakeDb.Customers.Remove(customer);
             return customer;
         }
+
+        public Customer ReadyByIdIncludeOrders(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

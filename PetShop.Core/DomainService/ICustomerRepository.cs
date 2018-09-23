@@ -14,5 +14,7 @@ namespace PetShop.Core.DomainService
         Customer UpdateCustomer(Customer customerUpdate);
         
         Customer DeleteCustomer(int id);
+
+        Customer ReadyByIdIncludeOrders(int id);
     }
 }
