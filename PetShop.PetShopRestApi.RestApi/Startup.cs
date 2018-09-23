@@ -19,8 +19,7 @@ namespace PetShop.PetShopRestApi.RestApi
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
-            //FakeDb.InitData();
+        {          
             Configuration = configuration;
         }
 
@@ -29,7 +28,9 @@ namespace PetShop.PetShopRestApi.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
+            //services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
+
+            services.AddDbContext<PetshopContext>(opt => opt.UseSqlite("Data Source=PetshopApp.db"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -61,6 +62,9 @@ namespace PetShop.PetShopRestApi.RestApi
                 {
                     var ctx = scope.ServiceProvider.GetService<PetshopContext>();
 
+                    ctx.Database.EnsureDeleted();
+                    ctx.Database.EnsureCreated();
+                    
                     var order2 = ctx.Orders.Add(new Order()
                     {
                         OrderId = 2,
