@@ -31,6 +31,12 @@ namespace PetShop.PetShopRestApi.RestApi
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+
+            services.AddScoped<IOrderLineRepository, OrderLineRepository>();
+            services.AddScoped<IOrderLineService, OrderLineService>();
+
             services.AddScoped<IPetShopRepository, PetRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
 
