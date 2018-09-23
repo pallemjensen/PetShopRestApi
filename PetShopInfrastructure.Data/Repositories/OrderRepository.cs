@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -36,12 +37,21 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Order DeleteOrder(Order order)
         {
-            throw new NotImplementedException();
+           var orderRemoved = _ctx.Remove(order).Entity;
+            _ctx.SaveChanges();
+            return orderRemoved;
         }
 
         public Order GetOrderById(int orderId)
         {
             return _ctx.Orders.FirstOrDefault(ord => ord.OrderId == orderId);
+        }
+
+        public Order GetOrderByIdIncludingCustomer(int id)
+        {
+            return _ctx.Orders
+                .Include(ord => ord.Customer)
+                .FirstOrDefault(ord => ord.OrderId == id);
         }
     }
 }

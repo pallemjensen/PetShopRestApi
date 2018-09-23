@@ -16,5 +16,7 @@ namespace PetShop.Core.DomainService
         Order DeleteOrder(Order order);
 
         Order GetOrderById(int orderId);
+
+        Order GetOrderByIdIncludingCustomer(int id);
     }
 }

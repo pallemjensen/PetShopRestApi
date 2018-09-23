@@ -19,8 +19,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public IEnumerable<Pet> ReadAllPets()
         {
-            return _ctx.Pets;
-            //return _ctx.Pets.Include(p => p.Owner);
+            return _ctx.Pets;          
         }
 
         public Pet UpdatePet(Pet pet)
@@ -30,7 +29,9 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet DeletePet(Pet pet)
         {
-            throw new NotImplementedException();
+            var petRemoved = _ctx.Remove(pet).Entity;
+            _ctx.SaveChanges();
+            return petRemoved;
         }
 
         public Pet CreatePet(Pet pet)
@@ -43,6 +44,13 @@ namespace PetShop.Infrastructure.Data.Repositories
         public Pet GetPetById(int petId)
         {
             return _ctx.Pets.FirstOrDefault((p => p.PetId == petId));
+        }
+
+        public Pet GetPetByIdIncludingOwner(int id)
+        {
+            return _ctx.Pets
+                .Include(p => p.Owner)
+                .FirstOrDefault(p => p.PetId == id);
         }
     }
 }

@@ -60,5 +60,10 @@ namespace PetShop.Core.ApplicationService.Implementation
         {
             return _orderRepository.GetOrderById(orderID);
         }
+
+        public Order GetOrderByIdIncludingCustomer(int id)
+        {
+            return _orderRepository.GetOrderByIdIncludingCustomer(id);
+        }
     }
 }

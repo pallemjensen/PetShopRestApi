@@ -103,6 +103,11 @@ namespace PetShop.Core.ApplicationService.Implementation
         public Pet GetPetById(int petId)
         {
             return _petShopRepository.GetPetById(petId);
-        }  
+        }
+
+        public Pet GetPetByIdIncludingOwner(int id)
+        {
+            return _petShopRepository.GetPetByIdIncludingOwner(id);
+        }
     }
 }

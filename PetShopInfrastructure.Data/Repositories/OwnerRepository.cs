@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -28,7 +29,9 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Owner DeleteOwner(Owner owner)
         {
-            throw new NotImplementedException();
+            var ownerRemoved = _ctx.Remove(owner).Entity;
+            _ctx.SaveChanges();
+            return ownerRemoved;
         }
 
         public Owner CreateOwner(Owner owner)
@@ -42,5 +45,13 @@ namespace PetShop.Infrastructure.Data.Repositories
         {
             return _ctx.Owners;
         }
+
+        public Owner ReadOwnerByIdIncludePets(int id)
+        {
+            return _ctx.Owners
+                .Include(o => o.OwnedPets)
+                .FirstOrDefault(o => o.OwnerId == id);
+        }
+       
     }
 }

@@ -31,7 +31,8 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
-            return _petShopService.GetPetById(id);
+            return _petShopService.GetPetByIdIncludingOwner(id);
+            //return _petShopService.GetPetById(id);
         }
 
         // POST api/pets

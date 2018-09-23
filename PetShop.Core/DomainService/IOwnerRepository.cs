@@ -16,5 +16,7 @@ namespace PetShop.Core.DomainService
         Owner CreateOwner(Owner owner);
 
         IEnumerable<Owner> ReadAllOwners();
+
+        Owner ReadOwnerByIdIncludePets(int id);
     }
 }

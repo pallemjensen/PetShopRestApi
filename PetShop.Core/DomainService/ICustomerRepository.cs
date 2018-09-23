@@ -15,6 +15,6 @@ namespace PetShop.Core.DomainService
         
         Customer DeleteCustomer(int id);
 
-        Customer ReadyByIdIncludeOrders(int id);
+        Customer ReadCustomerByIdIncludeOrders(int id);
     }
 }

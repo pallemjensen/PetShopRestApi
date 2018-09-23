@@ -30,7 +30,8 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Order> Get(int id)
         {
-            return _orderService.GetOrderById(id);
+            return _orderService.GetOrderByIdIncludingCustomer(id);
+            //return _orderService.GetOrderById(id);
         }
 
         // POST: api/Order

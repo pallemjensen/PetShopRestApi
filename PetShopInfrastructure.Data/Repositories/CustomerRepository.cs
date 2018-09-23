@@ -24,7 +24,7 @@ namespace PetShop.Infrastructure.Data.Repositories
            
         }
 
-        public Customer ReadyByIdIncludeOrders(int id)
+        public Customer ReadCustomerByIdIncludeOrders(int id)
         {
             return _ctx.Customers
                 .Include(c => c.Orders)
@@ -48,7 +48,9 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Customer DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            var customerRemoved = _ctx.Remove<Customer>(new Customer {CustomerId = id}).Entity;
+            _ctx.SaveChanges();
+            return customerRemoved;
         }
     }
 }

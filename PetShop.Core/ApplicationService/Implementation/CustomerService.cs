@@ -39,15 +39,8 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Customer FindCustomerByIdIncludeOrders(int id)
         {
-            var customer = _customerRepository.ReadyByIdIncludeOrders(id);
-            return customer;
-            //var customer = _customerRepository.ReadCustomerById(id);
-            //customer.Orders = _orderRepository.GetAllOrders()
-            //    .Where(order =>
-            // order.Customer != null &&
-            // order.customer.CustomerId == customer.CustomerId)
-            // .ToList();
-
+            var customer = _customerRepository.ReadCustomerByIdIncludeOrders(id);
+            return customer;            
         }
 
         public List<Customer> GetAllCustomers()
