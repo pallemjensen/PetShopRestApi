@@ -1,12 +1,11 @@
 ﻿using System;
 
-
 namespace PetShop.Core.Entities
 {
     public class Pet
     {
         public int PetId { get; set; }
-          
+
         public string PetName { get; set; }
 
         public string Type { get; set; }

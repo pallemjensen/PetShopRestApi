@@ -7,7 +7,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController 
+    public class CustomerController
     {
         private readonly ICustomerService _customerService;
 
@@ -20,21 +20,21 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Customer>> Get()
         {
-            return _customerService.GetAllCustomers();         
+            return _customerService.GetAllCustomers();
         }
 
         // GET: api/Customer/5
         [HttpGet("{id}")]
         public ActionResult<Customer> Get(int id)
         {
-            //if (id < 1)
-            //{
-            //    return BadRequest("Id must be greater then 0");
-            //}
+//            if (id < 1)
+//            {
+//                return BadRequest("Id must be greater then 0");
+//            }
 
             return _customerService.FindCustomerByIdIncludeOrders(id);
-           //return _customerService.FindCustomerById(id);
-        }       
+            //return _customerService.FindCustomerById(id);
+        }
 
         // POST: api/Customer
         [HttpPost]
@@ -65,10 +65,10 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
             return _customerService.UpdateCustomer(customer);
         }
 
-    // DELETE: api/ApiWithActions/5
-    [HttpDelete("{id}")]
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
         public ActionResult<Customer> Delete(int id)
-        {          
+        {
             return _customerService.DeleteCustomer(id);
         }
     }

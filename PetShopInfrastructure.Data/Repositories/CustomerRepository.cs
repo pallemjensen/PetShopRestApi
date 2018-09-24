@@ -9,7 +9,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        readonly PetshopContext _ctx;
+        private readonly PetshopContext _ctx;
 
         public CustomerRepository(PetshopContext ctx)
         {
@@ -21,7 +21,6 @@ namespace PetShop.Infrastructure.Data.Repositories
             var cust = _ctx.Customers.Add(customer).Entity;
             _ctx.SaveChanges();
             return cust;
-           
         }
 
         public Customer ReadCustomerByIdIncludeOrders(int id)
@@ -48,7 +47,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Customer DeleteCustomer(int id)
         {
-            var customerRemoved = _ctx.Remove<Customer>(new Customer {CustomerId = id}).Entity;
+            var customerRemoved = _ctx.Remove(new Customer {CustomerId = id}).Entity;
             _ctx.SaveChanges();
             return customerRemoved;
         }

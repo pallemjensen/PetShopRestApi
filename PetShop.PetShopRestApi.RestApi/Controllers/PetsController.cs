@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
@@ -46,13 +45,10 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Pet> Put(int id, [FromBody] Pet pet)
         {
-            if (id < 1 || id != pet.PetId)
-            {
-                return BadRequest("Parameter Id and pet ID must be the same.");
-            }
+            if (id < 1 || id != pet.PetId) return BadRequest("Parameter Id and pet ID must be the same.");
             return Ok(_petShopService.UpdatePet(pet));
         }
-     
+
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

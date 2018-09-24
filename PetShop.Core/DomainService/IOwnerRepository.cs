@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PetShop.Core.Entities;
 
 namespace PetShop.Core.DomainService
 {
-        public interface IOwnerRepository
+    public interface IOwnerRepository
     {
         Owner GetOwnerById(int ownerID);
 

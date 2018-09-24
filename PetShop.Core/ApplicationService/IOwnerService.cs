@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PetShop.Core.Entities;
 
 namespace PetShop.Core.ApplicationService
 {
-        public interface IOwnerService
+    public interface IOwnerService
     {
         Owner CreateOwner(Owner owner);
 
@@ -18,6 +16,5 @@ namespace PetShop.Core.ApplicationService
         List<Owner> GetAllOwners();
 
         Owner GetOwnerByIdIncludingPets(int id);
-
     }
 }

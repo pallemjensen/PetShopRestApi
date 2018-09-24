@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PetShop.Core.Entities;
 
 namespace PetShop.Core.ApplicationService
 {
     public interface ICustomerService
-    {   
+    {
         Customer CreateCustomer(Customer customer);
 
         Customer FindCustomerById(int id);
@@ -16,9 +14,9 @@ namespace PetShop.Core.ApplicationService
         List<Customer> GetAllCustomers();
 
         List<Customer> GetAllByFirstName(string name);
-     
+
         Customer UpdateCustomer(Customer customerUpdate);
-        
+
         Customer DeleteCustomer(int id);
     }
 }

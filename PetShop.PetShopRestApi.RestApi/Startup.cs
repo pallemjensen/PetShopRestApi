@@ -16,7 +16,7 @@ namespace PetShop.PetShopRestApi.RestApi
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {          
+        {
             Configuration = configuration;
         }
 
@@ -49,10 +49,10 @@ namespace PetShop.PetShopRestApi.RestApi
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
 
-            services.AddMvc().AddJsonOptions(options => {               
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,17 +65,15 @@ namespace PetShop.PetShopRestApi.RestApi
                 {
                     var ctx = scope.ServiceProvider.GetService<PetshopContext>();
                     DBInitializer.SeedDb(ctx);
-                } 
+                }
             }
             else
             {
                 app.UseHsts();
             }
+
             //app.UseHttpsRedirection();
             app.UseMvc();
-
-
-
         }
     }
 }

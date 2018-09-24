@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
@@ -14,7 +13,6 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public OrderRepository(PetshopContext ctx)
         {
-
             _ctx = ctx;
         }
 
@@ -37,7 +35,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Order DeleteOrder(Order order)
         {
-           var orderRemoved = _ctx.Remove(order).Entity;
+            var orderRemoved = _ctx.Remove(order).Entity;
             _ctx.SaveChanges();
             return orderRemoved;
         }

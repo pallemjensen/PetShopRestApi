@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
 
@@ -10,8 +8,8 @@ namespace PetShop.Core.ApplicationService.Implementation
 {
     public class OrderService : IOrderService
     {
-        private readonly IOrderRepository _orderRepository;
         private readonly ICustomerRepository _customerRepository;
+        private readonly IOrderRepository _orderRepository;
 
         public OrderService(IOrderRepository orderRepository,
             ICustomerRepository customerRepository)
@@ -27,7 +25,6 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Order CreateOrder(Order order)
         {
-            
             //if (order.Customer == null || order.Customer.CustomerId <= 0 )
             //{
             //    throw new InvalidDataException("To create an order, you need a customer");
@@ -38,11 +35,8 @@ namespace PetShop.Core.ApplicationService.Implementation
             //    throw new InvalidDataException("Customer was not found.");
             //}
 
-            if (order.OrderDate == null)
-            {
-                throw new InvalidDataException("Order needs an Order date.");
-            }
-            
+            if (order.OrderDate == null) throw new InvalidDataException("Order needs an Order date.");
+
             return _orderRepository.CreateOrder(order);
         }
 

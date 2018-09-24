@@ -19,45 +19,28 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public Owner CreateOwner(Owner owner)
         {
-            if (owner.FirstName == null || owner.FirstName.Any(char.IsDigit) || owner.LastName == null || owner.LastName.Any(char.IsDigit))
-            {
-                throw new InvalidDataException("Owner must have a first and last name and they can not contain numbers.");
-            }
+            if (owner.FirstName == null || owner.FirstName.Any(char.IsDigit) || owner.LastName == null ||
+                owner.LastName.Any(char.IsDigit))
+                throw new InvalidDataException(
+                    "Owner must have a first and last name and they can not contain numbers.");
 
             if (owner.Email == null || owner.PhoneNumber == null)
-            {
-               throw new InvalidDataException("Owner must have an email and phone number.");
-            }
+                throw new InvalidDataException("Owner must have an email and phone number.");
 
-            if (owner.FirstName.Length < 2)
-            {
-                throw new InvalidDataException("First name must be at least 2 characters.");
-            }
+            if (owner.FirstName.Length < 2) throw new InvalidDataException("First name must be at least 2 characters.");
 
-            if (owner.LastName.Length < 2)
-            {
-                throw new InvalidDataException("Last name must be at least 2 characters.");
-            }
+            if (owner.LastName.Length < 2) throw new InvalidDataException("Last name must be at least 2 characters.");
 
-            if ((!(owner.Email.Contains("@")) || (!(owner.Email.Contains(".")))))
-            {
+            if (!owner.Email.Contains("@") || !owner.Email.Contains("."))
                 throw new InvalidDataException("Not a valid email.");
-            }
 
             if (owner.PhoneNumber.Length < 8)
-            {
                 throw new InvalidDataException("Phone number must be at least 8 numbers.");
-            }
 
             if (!(owner.Address.Any(char.IsDigit) && owner.Address.Any(char.IsLetter)))
-            {
                 throw new InvalidDataException("Address must contain both letters and numbers.");
-            }
 
-            if (owner.Email.Length < 7)
-            {
-                throw new InvalidDataException("Email must be at least 7 characters.");
-            }
+            if (owner.Email.Length < 7) throw new InvalidDataException("Email must be at least 7 characters.");
 
             return _ownerRepository.CreateOwner(owner);
         }

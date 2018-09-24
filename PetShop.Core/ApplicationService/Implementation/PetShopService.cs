@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
@@ -21,25 +20,21 @@ namespace PetShop.Core.ApplicationService.Implementation
 
         public List<Pet> GetAllPets()
         {
-           return _petShopRepository.ReadAllPets().ToList();
+            return _petShopRepository.ReadAllPets().ToList();
         }
 
         public List<Pet> GetPetsByType(string type)
         {
-            List<Pet> petsByType = new List<Pet>();
+            var petsByType = new List<Pet>();
             foreach (var pet in GetAllPets())
-            {
                 if (string.Equals(pet.Type, type, StringComparison.OrdinalIgnoreCase))
-                {
                     petsByType.Add(pet);
-                }
-            }          
             return petsByType;
         }
 
         public List<Pet> GetFiveCheapestPets()
         {
-            var getFiveCheapestPets = SortPetsByPrice().GetRange(0,5).ToList();
+            var getFiveCheapestPets = SortPetsByPrice().GetRange(0, 5).ToList();
 
             return getFiveCheapestPets;
         }
@@ -49,7 +44,7 @@ namespace PetShop.Core.ApplicationService.Implementation
             var orderedByPrice = GetAllPets().OrderBy(orderedPet => orderedPet.Price).ToList();
 
             return orderedByPrice;
-        }      
+        }
 
         public Pet CreatePet(Pet pet)
         {
@@ -62,32 +57,21 @@ namespace PetShop.Core.ApplicationService.Implementation
             //    throw new InvalidDataException("Birthday is not a valid date.");
             //}
 
-            if (!Regex.IsMatch(Convert.ToString(pet.Price, CultureInfo.InvariantCulture), $@"^\d+$"))
-            {
+            if (!Regex.IsMatch(Convert.ToString(pet.Price, CultureInfo.InvariantCulture), @"^\d+$"))
                 throw new InvalidDataException("Price can only contain numbers.");
-            }
 
             if (pet.PetName == null || pet.PetName.Any(char.IsDigit))
-            {
                 throw new InvalidDataException("Pet must have a name and it can not contain numbers.");
-            }
 
             if (pet.Color == null || pet.Color.Any(char.IsDigit))
-            {
                 throw new InvalidDataException("Pet must have a color and it can not contain numbers.");
-            }
 
             if (pet.Type == null || pet.Type.Any(char.IsDigit))
-            {
                 throw new InvalidDataException("Pet must have a type and it can not contain numbers.");
-            }
 
-            if (pet.BirthDate == null)
-            {
-                throw new InvalidDataException("Pet must have a birthday.");
-            }
+            if (pet.BirthDate == null) throw new InvalidDataException("Pet must have a birthday.");
 
-           return _petShopRepository.CreatePet(pet);           
+            return _petShopRepository.CreatePet(pet);
         }
 
         public Pet UpdatePet(Pet pet)

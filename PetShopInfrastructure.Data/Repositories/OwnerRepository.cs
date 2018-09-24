@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
@@ -36,7 +35,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Owner CreateOwner(Owner owner)
         {
-           var newOwner = _ctx.Owners.Add(owner).Entity;
+            var newOwner = _ctx.Owners.Add(owner).Entity;
             _ctx.SaveChanges();
             return newOwner;
         }
@@ -52,6 +51,5 @@ namespace PetShop.Infrastructure.Data.Repositories
                 .Include(o => o.OwnedPets)
                 .FirstOrDefault(o => o.OwnerId == id);
         }
-       
     }
 }

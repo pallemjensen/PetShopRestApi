@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PetShop.Core.Entities
 {
@@ -13,6 +11,5 @@ namespace PetShop.Core.Entities
         public DateTime DeliveryDate { get; set; }
 
         public Customer Customer { get; set; }
-
     }
 }

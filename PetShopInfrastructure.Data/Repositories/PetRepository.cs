@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entities;
@@ -10,7 +9,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 {
     public class PetRepository : IPetShopRepository
     {
-        readonly PetshopContext _ctx;
+        private readonly PetshopContext _ctx;
 
         public PetRepository(PetshopContext ctx)
         {
@@ -19,7 +18,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public IEnumerable<Pet> ReadAllPets()
         {
-            return _ctx.Pets;          
+            return _ctx.Pets;
         }
 
         public Pet UpdatePet(Pet pet)
@@ -43,7 +42,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet GetPetById(int petId)
         {
-            return _ctx.Pets.FirstOrDefault((p => p.PetId == petId));
+            return _ctx.Pets.FirstOrDefault(p => p.PetId == petId);
         }
 
         public Pet GetPetByIdIncludingOwner(int id)
