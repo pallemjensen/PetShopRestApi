@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PetShop.Core.Entities;
 
 namespace PetShop.Infrastructure.Data
@@ -82,9 +83,43 @@ namespace PetShop.Infrastructure.Data
                 Type = "Horse",
                 Owner = owner2
             }).Entity;
-
-
+            
+//            var product1 = ctx.Products.Add(new Product
+//            {
+//                ProductName = "Milk"
+//            }).Entity;
+//                          
+//            var orderLine1 = ctx.OrderLines.Add(new OrderLine
+//            {
+//                Product = product1,
+//                Order = order2,
+//                Qty = 3
+//            }).Entity;
+//            
+//            var product2 = ctx.Products.Add(new Product
+//            {
+//                ProductName = "Coffee",
+//                OrderLines = new List<OrderLine> {orderLine1}
+//            }).Entity;
+//            
+//            var product3 = ctx.Products.Add(new Product
+//            {
+//                ProductName = "Bread"
+//            }).Entity;
+//            
+//            var orderLine2 = ctx.OrderLines.Add(new OrderLine
+//            {
+//                Product = product1,
+//                Order = order2,
+//                Qty = 3
+//            }).Entity;
+            
             ctx.SaveChanges();
+        
         }
     }
 }
+            
+            
+            
+ 

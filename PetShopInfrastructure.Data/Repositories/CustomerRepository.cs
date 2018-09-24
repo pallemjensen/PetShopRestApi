@@ -47,6 +47,8 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Customer DeleteCustomer(int id)
         {
+//            var ordersToRemove = _ctx.Orders.Where(o => o.Customer.CustomerId == id);
+//            _ctx.RemoveRange(ordersToRemove);
             var customerRemoved = _ctx.Remove(new Customer {CustomerId = id}).Entity;
             _ctx.SaveChanges();
             return customerRemoved;

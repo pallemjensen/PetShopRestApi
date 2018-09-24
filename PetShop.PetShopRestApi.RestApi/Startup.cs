@@ -72,7 +72,7 @@ namespace PetShop.PetShopRestApi.RestApi
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

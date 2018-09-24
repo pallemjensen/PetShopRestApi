@@ -23,6 +23,11 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Order CreateOrder(Order order)
         {
+            if (order.Customer != null)
+            {
+                _ctx.Attach(order.Customer);
+            }
+            
             var newOrder = _ctx.Orders.Add(order).Entity;
             _ctx.SaveChanges();
             return newOrder;
