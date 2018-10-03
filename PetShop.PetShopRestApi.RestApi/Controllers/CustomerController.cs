@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.Entities;
@@ -9,7 +7,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController
+    public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
 
@@ -29,10 +27,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Customer> Get(int id)
         {
-            //if (id < 1)
-            //{
-            //    return BadRequest("Id must be greater then 0");
-            //}
+            if (id < 1) return BadRequest("Id must be greater then 0");
 
             return _customerService.FindCustomerByIdIncludeOrders(id);
             //return _customerService.FindCustomerById(id);
@@ -42,15 +37,11 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPost]
         public ActionResult<Customer> Post([FromBody] Customer customer)
         {
-//            if (string.IsNullOrEmpty(customer.FirstName))
-//            {
-//                return BadRequest("Firstname is Required for Creating Customer");
-//            }
-//
-//            if (string.IsNullOrEmpty(customer.LastName))
-//            {
-//                return BadRequest("LastName is Required for Creating Customer");
-//            }
+            if (string.IsNullOrEmpty(customer.FirstName))
+                return BadRequest("Firstname is Required for Creating Customer");
+
+            if (string.IsNullOrEmpty(customer.LastName))
+                return BadRequest("LastName is Required for Creating Customer");
 
             return _customerService.CreateCustomer(customer);
         }
@@ -59,11 +50,9 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Customer> Put(int id, [FromBody] Customer customer)
         {
-            //if (id < 1 || id != customer.CustomerId)
-            //{
+            if (id < 1 || id != customer.CustomerId)
+                return BadRequest("Parameter Id and customer ID must be the same.");
 
-            //    return BadRequest("Parameter Id and customer ID must be the same.");
-            //}
             return _customerService.UpdateCustomer(customer);
         }
 

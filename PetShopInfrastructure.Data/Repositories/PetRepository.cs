@@ -35,6 +35,7 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet CreatePet(Pet pet)
         {
+            if (pet.Owner != null) _ctx.Attach(pet.Owner);
             var _pet = _ctx.Pets.Add(pet).Entity;
             _ctx.SaveChanges();
             return _pet;

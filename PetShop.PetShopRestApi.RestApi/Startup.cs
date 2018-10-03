@@ -26,6 +26,13 @@ namespace PetShop.PetShopRestApi.RestApi
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
+            services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin());
+            });
 
             services.AddDbContext<PetshopContext>(opt => opt.UseSqlite("Data Source=PetshopApp.db"));
 
@@ -72,7 +79,10 @@ namespace PetShop.PetShopRestApi.RestApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors("AllowAllOrigins");
+
+            //app.UseHttpsRedirection();
+
             app.UseMvc();
         }
     }

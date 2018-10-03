@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PetShop.Core.Entities;
 
 namespace PetShop.Infrastructure.Data
@@ -62,16 +61,6 @@ namespace PetShop.Infrastructure.Data
                 //OwnedPets = new List<Pet>() { pet1 }
             }).Entity;
 
-            var owner2 = ctx.Owners.Add(new Owner
-            {
-                FirstName = "Pale",
-                LastName = "Rider",
-                Address = "Western Heliosphere 1",
-                PhoneNumber = "99999992",
-                Email = "theuniverseatwork@massiveblackhole.uni",
-                OwnedPets = new List<Pet> {pet1}
-            }).Entity;
-
             var pet2 = ctx.Pets.Add(new Pet
             {
                 PetName = "Titan",
@@ -80,46 +69,51 @@ namespace PetShop.Infrastructure.Data
                 Color = "Striped",
                 PreviousOwner = "Finn",
                 Price = 549,
-                Type = "Horse",
-                Owner = owner2
+                Type = "Horse"
+                //Owner = owner2
             }).Entity;
-            
-//            var product1 = ctx.Products.Add(new Product
-//            {
-//                ProductName = "Milk"
-//            }).Entity;
-//                          
-//            var orderLine1 = ctx.OrderLines.Add(new OrderLine
-//            {
-//                Product = product1,
-//                Order = order2,
-//                Qty = 3
-//            }).Entity;
-//            
-//            var product2 = ctx.Products.Add(new Product
-//            {
-//                ProductName = "Coffee",
-//                OrderLines = new List<OrderLine> {orderLine1}
-//            }).Entity;
-//            
-//            var product3 = ctx.Products.Add(new Product
-//            {
-//                ProductName = "Bread"
-//            }).Entity;
-//            
-//            var orderLine2 = ctx.OrderLines.Add(new OrderLine
-//            {
-//                Product = product1,
-//                Order = order2,
-//                Qty = 3
-//            }).Entity;
-            
+            var owner2 = ctx.Owners.Add(new Owner
+            {
+                FirstName = "Pale",
+                LastName = "Rider",
+                Address = "Western Heliosphere 1",
+                PhoneNumber = "99999992",
+                Email = "theuniverseatwork@massiveblackhole.uni",
+                OwnedPets = new List<Pet> {pet1, pet2}
+            }).Entity;
+
+
+            //var product1 = ctx.Products.Add(new Product
+            //{
+            //    ProductName = "Milk"
+            //}).Entity;
+
+            //var orderLine1 = ctx.OrderLines.Add(new OrderLine
+            //{
+            //    Product = product1,
+            //    Order = order2,
+            //    Qty = 3
+            //}).Entity;
+
+            //var product2 = ctx.Products.Add(new Product
+            //{
+            //    ProductName = "Coffee",
+            //    OrderLines = new List<OrderLine> { orderLine1 }
+            //}).Entity;
+
+            //var product3 = ctx.Products.Add(new Product
+            //{
+            //    ProductName = "Bread"
+            //}).Entity;
+
+            //var orderLine2 = ctx.OrderLines.Add(new OrderLine
+            //{
+            //    Product = product1,
+            //    Order = order2,
+            //    Qty = 3
+            //}).Entity;
+
             ctx.SaveChanges();
-        
         }
     }
 }
-            
-            
-            
- 

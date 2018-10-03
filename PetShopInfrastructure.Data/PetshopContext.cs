@@ -9,6 +9,11 @@ namespace PetShop.Infrastructure.Data
         {
         }
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Pet> Pets { get; set; }
+        public DbSet<Owner> Owners { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
@@ -22,12 +27,7 @@ namespace PetShop.Infrastructure.Data
                 .OnDelete(DeleteBehavior.SetNull);
         }
 
-
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Pet> Pets { get; set; }
-        public DbSet<Owner> Owners { get; set; }
-//        public DbSet<Product> Products { get; set; }
-//        public DbSet<OrderLine> OrderLines { get; set; }
+        //public DbSet<Product> Products { get; set; }
+        //public DbSet<OrderLine> OrderLines { get; set; }
     }
 }

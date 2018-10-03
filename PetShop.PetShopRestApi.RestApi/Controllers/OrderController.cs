@@ -51,7 +51,8 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Order> Put(int id, [FromBody] Order order)
         {
-            if (id < 1 || id != order.OrderId) return BadRequest("Parameter Id and order ID must be the same.");
+            if (id < 1 || id != order.OrderId)
+                return BadRequest("Parameter Id and order ID must be the same.");
             return Ok(_orderService.UpdateOrder(order));
         }
 
