@@ -82,37 +82,25 @@ namespace PetShop.Infrastructure.Data
                 OwnedPets = new List<Pet> {pet1, pet2}
             }).Entity;
 
+            //ctx.SaveChanges();
 
-            //var product1 = ctx.Products.Add(new Product
-            //{
-            //    ProductName = "Milk"
-            //}).Entity;
+            string password = "1234";
 
-            //var orderLine1 = ctx.OrderLines.Add(new OrderLine
-            //{
-            //    Product = product1,
-            //    Order = order2,
-            //    Qty = 3
-            //}).Entity;
-
-            //var product2 = ctx.Products.Add(new Product
-            //{
-            //    ProductName = "Coffee",
-            //    OrderLines = new List<OrderLine> { orderLine1 }
-            //}).Entity;
-
-            //var product3 = ctx.Products.Add(new Product
-            //{
-            //    ProductName = "Bread"
-            //}).Entity;
-
-            //var orderLine2 = ctx.OrderLines.Add(new OrderLine
-            //{
-            //    Product = product1,
-            //    Order = order2,
-            //    Qty = 3
-            //}).Entity;
-
+            List<User> users = new List<User>
+            {
+                new User {
+                    Username = "UserJoe",
+                    Password = password,
+                    IsAdmin = false
+                },
+                new User {
+                    Username = "AdminAnn",
+                    Password = password,
+                    IsAdmin = true
+                }
+            };
+           
+            ctx.Users.AddRange(users);
             ctx.SaveChanges();
         }
     }

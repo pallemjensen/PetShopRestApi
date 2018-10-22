@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.Entities;
@@ -17,6 +18,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
 
         // GET: api/Customer
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Customer>> Get()
         {
@@ -24,6 +26,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
 
         // GET: api/Customer/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public ActionResult<Customer> Get(int id)
         {
@@ -34,6 +37,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
 
         // POST: api/Customer
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Customer> Post([FromBody] Customer customer)
         {
@@ -47,6 +51,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
 
         // PUT: api/Customer/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Customer> Put(int id, [FromBody] Customer customer)
         {
@@ -57,6 +62,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Customer> Delete(int id)
         {

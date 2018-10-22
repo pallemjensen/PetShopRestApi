@@ -1,15 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.ApplicationService.Implementation;
 using PetShop.Core.DomainService;
 using PetShop.Infrastructure.Data;
 using PetShop.Infrastructure.Data.Repositories;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PetShop.Core.Entities;
+using PetShop.PetShopRestApi.RestApi.Helpers;
+
 
 namespace PetShop.PetShopRestApi.RestApi
 {
@@ -18,11 +26,11 @@ namespace PetShop.PetShopRestApi.RestApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+           JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
@@ -31,7 +39,20 @@ namespace PetShop.PetShopRestApi.RestApi
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
-                    builder => builder.AllowAnyOrigin());
+                    builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = JwtSecurityKey.Key,
+                    ValidateLifetime = true, //validate the expiration and not before values in the token
+                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                };
             });
 
             services.AddDbContext<PetshopContext>(opt => opt.UseSqlite("Data Source=PetshopApp.db"));
@@ -56,6 +77,9 @@ namespace PetShop.PetShopRestApi.RestApi
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
 
+            services.AddScoped<IUserRepository<User>, UserRepository>();
+
+
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -79,10 +103,11 @@ namespace PetShop.PetShopRestApi.RestApi
                 app.UseHsts();
             }
 
+            //app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyOrigin());
+
             app.UseCors("AllowAllOrigins");
-
-            //app.UseHttpsRedirection();
-
+            app.UseHttpsRedirection();
+           app.UseAuthentication();
             app.UseMvc();
         }
     }
