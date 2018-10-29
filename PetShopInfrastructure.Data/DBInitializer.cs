@@ -82,26 +82,38 @@ namespace PetShop.Infrastructure.Data
                 OwnedPets = new List<Pet> {pet1, pet2}
             }).Entity;
 
-            //ctx.SaveChanges();
-
             string password = "1234";
+            byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
+            CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
+            CreatePasswordHash(password, out passwordHashAnn, out passwordSaltAnn);
 
             List<User> users = new List<User>
             {
                 new User {
                     Username = "UserJoe",
-                    Password = password,
+                    PasswordHash = passwordHashJoe,
+                    PasswordSalt = passwordSaltJoe,
                     IsAdmin = false
                 },
                 new User {
                     Username = "AdminAnn",
-                    Password = password,
+                    PasswordHash = passwordHashAnn,
+                    PasswordSalt = passwordSaltAnn,
                     IsAdmin = true
                 }
             };
-           
+
             ctx.Users.AddRange(users);
             ctx.SaveChanges();
+        }
+
+        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
     }
 }

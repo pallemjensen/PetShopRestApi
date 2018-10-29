@@ -107,7 +107,7 @@ namespace PetShop.PetShopRestApi.RestApi
 
             app.UseCors("AllowAllOrigins");
             app.UseHttpsRedirection();
-           app.UseAuthentication();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

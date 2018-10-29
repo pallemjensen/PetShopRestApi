@@ -20,7 +20,7 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
 
 
         // GET api/values
-         [Authorize]
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
         {
