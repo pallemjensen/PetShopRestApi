@@ -21,24 +21,33 @@ namespace PetShop.PetShopRestApi.RestApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-           JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
-        }
+        private IConfiguration Configuration { get; }
 
-        public IConfiguration Configuration { get; }
-        
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+            var builder = new ConfigurationBuilder()
+
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+
+            JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
+        }    
+             
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<PetshopContext>(opt => opt.UseInMemoryDatabase("InMemDbOne"));
             services.AddCors();
-
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
                     builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -53,6 +62,7 @@ namespace PetShop.PetShopRestApi.RestApi
                 };
             });
 
+            
             services.AddDbContext<PetshopContext>(opt => opt.UseSqlite("Data Source=PetshopApp.db"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -77,11 +87,21 @@ namespace PetShop.PetShopRestApi.RestApi
 
             services.AddScoped<IUserRepository<User>, UserRepository>();
 
-
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<PetshopContext>(
+                opt => opt.UseSqlite("Data Source=PetshopApp.db"));
+            }
+            else if (_env.IsProduction())
+            {
+                services.AddDbContext<PetshopContext>(
+                    opt => opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +118,11 @@ namespace PetShop.PetShopRestApi.RestApi
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetshopContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 app.UseHsts();
             }
 
