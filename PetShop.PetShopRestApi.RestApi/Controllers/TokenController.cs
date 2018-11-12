@@ -78,9 +78,11 @@ namespace PetShop.PetShopRestApi.RestApi.Controllers
                     null, // audience - not needed (ValidateAudience = false)
                     claims.ToArray(),
                     DateTime.Now, // notBefore
-                    DateTime.Now.AddSeconds(30)));  // expires
+                    DateTime.Now.AddMinutes(100)));  // expires
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
     }
 }

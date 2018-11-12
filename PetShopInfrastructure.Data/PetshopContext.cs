@@ -26,8 +26,6 @@ namespace PetShop.Infrastructure.Data
                 .HasOne(ow => ow.Owner)
                 .WithMany(p => p.OwnedPets)
                 .OnDelete(DeleteBehavior.SetNull);
-        }
-
-       
+        }      
     }
 }

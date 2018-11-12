@@ -23,7 +23,10 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet UpdatePet(Pet pet)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(pet).State = EntityState.Modified;
+            //_ctx.Entry(pet).Reference(p => p.Owner).IsModified = true;
+            _ctx.SaveChanges();
+            return pet;
         }
 
         public Pet DeletePet(Pet pet)

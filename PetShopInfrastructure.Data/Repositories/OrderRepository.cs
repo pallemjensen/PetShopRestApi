@@ -32,7 +32,10 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Order UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(order).State = EntityState.Modified;
+           // _ctx.Entry(order).Reference(o => o.Customer).IsModified = true;
+            _ctx.SaveChanges();
+            return order;
         }
 
         public Order DeleteOrder(Order order)

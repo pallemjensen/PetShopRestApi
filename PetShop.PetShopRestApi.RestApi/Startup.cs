@@ -13,8 +13,6 @@ using PetShop.Core.ApplicationService.Implementation;
 using PetShop.Core.DomainService;
 using PetShop.Infrastructure.Data;
 using PetShop.Infrastructure.Data.Repositories;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PetShop.Core.Entities;
 using PetShop.PetShopRestApi.RestApi.Helpers;
 
@@ -50,8 +48,8 @@ namespace PetShop.PetShopRestApi.RestApi
                     ValidateIssuer = false,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = JwtSecurityKey.Key,
-                    ValidateLifetime = true, //validate the expiration and not before values in the token
-                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromSeconds(30)
                 };
             });
 

@@ -43,7 +43,10 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Customer UpdateCustomer(Customer customerUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(customerUpdate).State = EntityState.Modified;
+           // _ctx.Entry(customerUpdate).Reference(c => c.Orders).IsModified = true;
+            _ctx.SaveChanges();
+            return customerUpdate;          
         }
 
         public Customer DeleteCustomer(int id)
